@@ -1,0 +1,40 @@
+name: Run aucr.py and march.py on Dallas schedule
+
+on:
+  schedule:
+    # GitHub Actions cron runs in UTC (no timezone support).
+    # Dallas (America/Chicago) on Feb = CST (UTC-6):
+    # 8a,10a,12p,2p,4p,6p,8p,10p CST  ->  14,16,18,20,22,0,2,4 UTC
+    - cron: "0 14-22/2 * * *"  # 14,16,18,20,22 UTC
+    - cron: "0 0-4/2 * * *"    # 0,2,4 UTC
+  workflow_dispatch: {}
+
+jobs:
+  run-scripts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run upcoming_revenue.py
+        env:
+          tenant_id: ${{ secrets.tenant_id }}
+          client_id: ${{ secrets.client_id }}
+          client_secret: ${{ secrets.client_secret }}
+          drive_id: ${{ secrets.drive_id }}
+          file_item_id: ${{ secrets.file_item_id }}
+        run: |
+          python aucr.py
+
+     
