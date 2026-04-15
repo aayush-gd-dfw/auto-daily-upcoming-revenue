@@ -331,7 +331,7 @@ def completed_values_from_rows(rows):
 
         total += parse_money(v)
 
-    return round(total, 2)
+    return round(total/2, 2)
 
 
 # -------------------- SharePoint workbook updates --------------------
