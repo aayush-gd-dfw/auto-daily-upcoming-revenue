@@ -36,5 +36,14 @@ jobs:
           file_item_id: ${{ secrets.file_item_id }}
         run: |
           python aucr.py
+      - name: Run upcoming_revenue.py
+        env:
+          tenant_id: ${{ secrets.tenant_id }}
+          client_id: ${{ secrets.client_id }}
+          client_secret: ${{ secrets.client_secret }}
+          drive_id: ${{ secrets.drive_id }}
+          file_item_id: ${{ secrets.file_item_id }}
+        run: |
+          python aucr2.py
 
      
