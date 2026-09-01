@@ -13,7 +13,7 @@ from openpyxl import load_workbook
 
 
 # -------------------- CONFIG --------------------
-TAB_NAME = os.getenv("TAB_NAME", "July")
+TAB_NAME = os.getenv("TAB_NAME", "September")
 
 SUBJECT_COMPLETED_PHRASE = "Auto Completed Report"
 SUBJECT_UPCOMING_PHRASE = "Auto upcoming report"
